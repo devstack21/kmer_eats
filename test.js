@@ -1,12 +1,5 @@
+let tab = {};
 
-let message = 'err';
+tab['r'] = 'hello';
 
-let send = (message) =>{
-    if (message == 'err'){
-        console.log('coooollllll');
-        send(message);
-    }
-};
-
-
-send('err');
+console.log(tab['a']);

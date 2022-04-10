@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 
 const foodSchema = new mongoose.Schema({
+
     name : {
         type : string ,
         required : true ,
@@ -20,16 +21,18 @@ const foodSchema = new mongoose.Schema({
                 },
                 ville : String ,
                 pays : String ,
-                localisation : String 
+                localisation : String ,
+                prix : String , // prix du plat pour chaque boutique 
 
             }
-        ],// nformations concernant les boutiques vendant ce plat
+        ],// informations concernant les boutiques vendant ce plat
         
     },
 
     picture :{
         type : String 
     },
+    // description du plat 
     description : {
         type : String ,
         lowercase : true ,
@@ -37,7 +40,6 @@ const foodSchema = new mongoose.Schema({
     },
     prix : {
         type : String ,
-        required : true ,
     },
     likers : {
         type : [String] // userId 
@@ -52,13 +54,11 @@ const foodSchema = new mongoose.Schema({
                 description : String ,
                 prix : String,
                 picture : String ,
-                qte_minim : Number,
+                qte_min : Number,
                 qte_max : Number,
-                qte_kg_minim : String,
+                qte_kg_min : String,
                 qte_kg_max : String ,
-                origin_buy : [
 
-                ] // origine de l'achat 
             }
         ],
         required : true ,
@@ -70,10 +70,23 @@ const foodSchema = new mongoose.Schema({
         unique : true ,
         minlength : 10,
         maxlength : 200
+    },
+    owner : {
+        type : {
+            prix_owner : String ,
+            ownerId : String // id user 
+        },
+        
     }
 
 },{
     timestamps : true
+});
+
+foodSchema.pre('save' , function (next) {
+    this.name = this.name.toLowerCase();
+    this.description = this.description.toLowerCase();
+    next();
 });
 
 const foodModel = mongoose.model('food' , foodSchema);

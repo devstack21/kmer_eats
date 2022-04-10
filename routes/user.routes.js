@@ -17,34 +17,4 @@ router
     .put('/profile/:id' , updateProfile)
     .post('/upload/profile-images',updateImageProfile);
     
-
-// router
-
-//     // like food
-//     .post('/like/food/:id' , likeFood)
-//     .post('/unlike/food/:id', unlikeFood)
-
-//     // search food 
-
-//     .post('/search/foodbyname/:id' , searchFoodByname)
-//     .post('/search/foodbyingredients/:id' , searchFoodByIngredients)
-//     .post('/get/foodbycategory/:id' , getFoodBycategory)
-//     .post('/get/allfood' , getAllFood);
-
-
-// router
-//     // add delivery 
-
-//     .patch('/valid/delivery/:id' , validDelivery)
-//     .patch('/unvalid/delivery/:id' , unvalidDelivery); // annuler la demande de livraison d'un livreur 
-
-//  post receipts 
-//post('/post-receipts:/:id' , postReceiptsByUser)
-//put('/post-receipts/update/:id' , updatePostReceipts)
-//delete('/post-receipts/delete/:id' , deletePostReceipts)
-
-
-//routes api user 
-
-
 module.exports = router ;

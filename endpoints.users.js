@@ -22,7 +22,7 @@ const {checkConnectionUserAppMobile} = require('./middleware/auth.user.middlewar
 const { connectionRetryMongodb } = require('./mongo.models.connect/connect.mongodb');
 
 // define routes
-const userRouter = require('./routes/user.routes');
+const userRouter = require('./routes/user.routes') , foodApiRoutes = require('./routes/food.routes');
 
 // limit debit request
 const limiter = rateLimit({
@@ -120,6 +120,13 @@ app
 // implements user routes 
 
 .use('/user-management' ,limiter ,  userRouter)
+
+// implements user api 
+
+
+// implements food api 
+
+.use('/food-api' , limiter , foodApiRoutes)
 
 // start server
 .listen(process.env.PORT , () => {
