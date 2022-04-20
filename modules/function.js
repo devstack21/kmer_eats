@@ -26,6 +26,5 @@ exports.sendEmailByNodeMailer = async (email_sender , email_receiver) =>{
  *@returns {Number} 
 */
 exports.generateRandomNumber = (min , max) =>{
-    let nombre = Math.floor(Math.random() * (max - min + 1) + min);
-    return nombre;
+    return  Math.floor(Math.random() * (max - min + 1) + min);
 };

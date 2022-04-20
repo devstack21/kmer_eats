@@ -1,22 +1,4 @@
-const moment = require('moment');
 
-
-exports.ErrorConnectionMongodb = (error) =>{
-
-    console.log(error);
-
-    return "Erreur de connexion a la base de donnée";
-   
-};
-
-exports.ErrorMiddlewareConnetionMongodb = (req , res , error) =>{
-
-        res.status(400).json({
-            status : false,
-            message : error,
-            time : moment(new Date()).format()// definition format date 
-        });
-};
 
 // error signup && login 
 
@@ -60,4 +42,9 @@ exports.mdpForgotErrors = (err) =>{
 
     return errors ;
     
+};
+
+exports.updateImageProfileError = (err) =>{
+    let errors = {maxSize : '' , format : ''};
+
 };

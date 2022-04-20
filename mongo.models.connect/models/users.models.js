@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
         minlength : 10,
         unique : true 
     },
+    // id des differents post food 
+    postFood :{
+        type : [String]
+    },
     picture :{
         type : String ,
         required : [true , "photo de profil doit etre definit"],
@@ -59,21 +63,30 @@ const userSchema = new mongoose.Schema({
         maxlength : 9,
         unique : true 
     },
+    abonnement :{
+        type : {
+            state : Boolean,
+            type_abonnement : String,
+            date_abonnement : String,
+            fin_abonnement : String 
+        }
+    },
+    // les differents chefs auxquels user est abonné
+    following :  {
+        type : [String] // id for each 
+    },
+    followers :{
+        type : [String] 
+    },
 
     dataCommand: {
         
         type : [
             {   
                 deliveryId : String , // id livreur 
-                tab_food : [{
-                    name_food : String,
-                    prix_food : String,
-                    origin_food : String,// le lieu de vente du plat 
-                    categorie_food : String,
-                    picture_food : String 
-                }],
+                tab_food : [String], //id food 
 
-                start_command : String ,
+                start_command : String , // time 
                 end_command : String 
             }
         ]
@@ -82,18 +95,7 @@ const userSchema = new mongoose.Schema({
     like_food : {
         type : [String] // add food id 
     },
-    
-    dataDeliveryOffline : { // possibilite d'utilisation des sessions (express(session))
-        
-        type : [
-            {   
-                foodId : String ,
-                deliveryId : String ,
-                timestamps : String, // date de reception de la demande de livraisonù
-            }
-        ]
-    }
-},{
+ 
     timestamps : true
 });
 

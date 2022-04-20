@@ -25,7 +25,7 @@ exports.updateImageProfile = async (req , res) =>{
     } catch (error) {
         // const errors = updateImageProfileError(error);
         return res.status(200).json({
-            status : 'failed',
+            status : false,
             message : error,
             time : moment(new Date()).format()
         }); 

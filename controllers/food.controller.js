@@ -3,6 +3,8 @@ const foodModel = require('../mongo.models.connect/models/food.models');
 const lodash = require('lodash');
 const axios = require('axios');
 const {generateRandomNumber} = require('../modules/function');
+const foodID = require('mongoose').Types.ObjectId;
+
 
 exports.getAllDataFoodAsc = async (req, res) =>{
 
@@ -196,3 +198,43 @@ exports.getDataFoodRandom = async (req , res) =>{
     }
 };
 
+exports.getDataFoodById = async (req , res) =>{
+
+    if (!foodID.isValid(req.params.foodId)){
+        return res.status(400).json({
+            status : false ,
+            message : 'ID FOOD UNKNON',
+            time : moment(new Date()).format()
+        }); 
+    }
+
+    try {
+        const dataFood = await foodModel.findById(req.params.foodId);
+        res.status(200).json({
+            status : true , 
+            message : 'data  food '+dataFood.name,
+            data : dataFood,
+            time : moment(new Date()).format()
+        }); 
+        // set session
+        req.session.status = true ;
+        req.session.statusCode = 200;
+        req.session.message = 'get data food ok';
+        // log session
+        console.log(req.session)
+    } catch (error) {
+        // set session
+        req.session.status = false ;
+        req.session.statusCode = 400;
+        req.session.message = 'Erreur requete data food';
+        //log session
+        console.log(req.session);
+        // send response at client
+        res.status(400).json({
+            status : false,
+            message : 'Erreur requete data food',
+            time : moment(new Date()).format()
+        });
+    }
+    
+};

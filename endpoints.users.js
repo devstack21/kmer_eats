@@ -23,7 +23,7 @@ const { connectionRetryMongodb } = require('./mongo.models.connect/connect.mongo
 
 // define routes
 const userRouter = require('./routes/user.routes') , foodApiRoutes = require('./routes/food.routes');
-
+const deliveryRoutes = require('./routes/user-delivery.routes') , postReceiptsRoutes = require('./routes/post-receipts.routes');
 // limit debit request
 const limiter = rateLimit({
 
@@ -109,7 +109,7 @@ app
         }
         else{
             res.status(200).json({
-                status : true ,
+                status : false ,
                 message : 'go sign ',
                 time : moment(new Date()).format()
             });
@@ -128,7 +128,17 @@ app
 
 .use('/food-api' , limiter , foodApiRoutes)
 
+// implements delivery routes 
+
+.use('/delivery-management' , limiter , deliveryRoutes)
+
+// post receipts routes 
+
+.use('/post-receipts-mangement' , limiter , postReceiptsRoutes)
+
 // start server
 .listen(process.env.PORT , () => {
+
     console.log(`Server started on the port ${process.env.PORT}`);
 });
+

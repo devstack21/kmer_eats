@@ -134,6 +134,7 @@ exports.signIn = async (req , res ) =>{
 };
 
 exports.pwdForgot = async (req ,res) =>{
+    
     const {email} = await req.body;
 
     try {
@@ -220,7 +221,7 @@ exports.logout = async (req , res) =>{
 
         res.status(400).json({
             status : false,
-            message : error,
+            message : 'Erreur de deconnexion',
             time : moment(new Date()).format()
         });
         // set session
@@ -311,7 +312,7 @@ exports.updateProfile = async (req , res) =>{
         // const errors = updateProfile(error);
         return res.status(400).json({
             status : false,
-            message : error,
+            message : 'Erreur de mis a jour ',
             time : moment(new Date()).format()
         });
        

@@ -30,7 +30,8 @@ const foodSchema = new mongoose.Schema({
     },
 
     picture :{
-        type : String 
+        type : String ,
+        default : ''
     },
     // description du plat 
     description : {
@@ -86,6 +87,9 @@ const foodSchema = new mongoose.Schema({
 foodSchema.pre('save' , function (next) {
     this.name = this.name.toLowerCase();
     this.description = this.description.toLowerCase();
+    this.recette = this.recette.toLowerCase();
+    this.categorie = this.categorie.toLowerCase();
+    
     next();
 });
 

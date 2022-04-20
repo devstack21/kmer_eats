@@ -27,7 +27,7 @@ exports.connectionRetryMongodb = async () => {
         // retry connection with db mongodb 
         setTimeout(() => {
 
-          connectionRetryMongodb();  
+          this.connectionRetryMongodb();  
           
         }, 5000);
         
