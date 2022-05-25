@@ -31,7 +31,8 @@ function checkDataEmptyAndUpdate (user) {
 
 exports.signUp = async (req , res) =>{
     // control data undefined front end 
-
+    /// req.file for image 
+    
     const {pseudo , email , password , picture , age , ville , nationalite  , date_naissance ,numero  } = await req.body;
 
     try {

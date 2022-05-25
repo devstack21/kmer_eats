@@ -1,0 +1,5 @@
+./node_modules 
+./config_server/.env
+./LRCN15-food-recipe-app-starter
+.dockerignore
+Dockerfile

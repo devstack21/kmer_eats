@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const foodSchema = new mongoose.Schema({
 
     name : {
-        type : string ,
-        required : true ,
+        type : String ,
+        required : [true , "Le nom du plat ne doit pas etre vide"] ,
         unique : true ,
         trimp : true
     },
@@ -31,13 +31,14 @@ const foodSchema = new mongoose.Schema({
 
     picture :{
         type : String ,
-        default : ''
+        required : [true , "l'image du plat doit etre definie" ]
     },
     // description du plat 
     description : {
         type : String ,
         lowercase : true ,
-        maxlength : 50
+        maxlength : 50,
+        required : [true , "la description du plat doit etre definie"]
     },
     prix : {
         type : String ,
@@ -46,7 +47,8 @@ const foodSchema = new mongoose.Schema({
         type : [String] // userId 
     },
     categorie : {
-        type : String 
+        type : String ,
+        required : [true , "La categorie du plat doit etre definie"] 
     },
     list_ingredients :{
         type : [
@@ -54,7 +56,7 @@ const foodSchema = new mongoose.Schema({
                 name : String ,
                 description : String ,
                 prix : String,
-                picture : String ,
+                picture : String , // link pictures food 
                 qte_min : Number,
                 qte_max : Number,
                 qte_kg_min : String,

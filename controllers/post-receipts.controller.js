@@ -11,6 +11,7 @@ const fs = require('fs');
 
 
 // poster une recette
+
 exports.postReceipts = async (req , res) =>{
     
     if(!checkIDUser(req.params.id)) {
@@ -46,7 +47,7 @@ exports.postReceipts = async (req , res) =>{
         res.status(200).json({
             status : true ,
             message : 'Nouveau plat enregistré',
-            data : newFood._id,
+            _id : newFood._id,
             time : moment(new Date()).format()
         });
         // push data 

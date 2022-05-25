@@ -95,9 +95,11 @@ const userSchema = new mongoose.Schema({
     like_food : {
         type : [String] // add food id 
     },
- 
-    timestamps : true
-});
+     },
+ { 
+    timestamps : true 
+}
+);
 
 
 userSchema.pre("save" , async function(next){

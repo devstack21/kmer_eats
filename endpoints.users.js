@@ -1,5 +1,6 @@
 
 // upload images : https://www.youtube.com/watch?v=GyzC-30Bqfc&t=6s
+// front end react native : https://github.com/byprogrammers/LCRN15-food-recipe-app-starter
 // modules
 const express = require('express') , bodyParser = require('body-parser') , cors = require('cors') , cookieParser = require('cookie-parser') ;
 const rateLimit = require('express-rate-limit') , session = require('express-session') ;
@@ -22,7 +23,7 @@ const {checkConnectionUserAppMobile} = require('./middleware/auth.user.middlewar
 const { connectionRetryMongodb } = require('./mongo.models.connect/connect.mongodb');
 
 // define routes
-const userRouter = require('./routes/user.routes') , foodApiRoutes = require('./routes/food.routes');
+const userRouter = require('./routes/user-management.routes') , foodApiRoutes = require('./routes/food.routes');
 const deliveryRoutes = require('./routes/user-delivery.routes') , postReceiptsRoutes = require('./routes/post-receipts.routes');
 // limit debit request
 const limiter = rateLimit({
@@ -54,7 +55,7 @@ connectionRetryMongodb();
 
 //cors options
 const corsOptions = {
-    origin : "*",
+    origin : "*", // 
     methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
     optionsSuccessStatus: 200
 };
@@ -87,6 +88,8 @@ app
     },
     
 }))
+// https://www.youtube.com/watch?v=xsFHKCcV2rg
+//https://leclaireur.fnac.com/article/19650-mi-air-charge-xiaomi-promet-de-recharger-sans-fil-et-a-distance-vos-appareils/
 // check connection user app mobile 
 
 .use('/user-connect-server' , limiter , checkConnectionUserAppMobile , (req , res) =>{
@@ -108,11 +111,17 @@ app
             user_current = null;
         }
         else{
+
             res.status(200).json({
                 status : false ,
                 message : 'go sign ',
                 time : moment(new Date()).format()
             });
+            // set session
+            req.session.statusCode= 200;
+            // log session
+            console.log(req.session);
+
         }
         
 })
@@ -128,13 +137,13 @@ app
 
 .use('/food-api' , limiter , foodApiRoutes)
 
-// implements delivery routes 
+// implements delivery routes : pour la validation de la livraison
 
 .use('/delivery-management' , limiter , deliveryRoutes)
 
 // post receipts routes 
 
-.use('/post-receipts-mangement' , limiter , postReceiptsRoutes)
+.use('/post-receipts-management' , limiter , postReceiptsRoutes)
 
 // start server
 .listen(process.env.PORT , () => {

@@ -27,7 +27,7 @@ const {
 
 router 
     .post('/post-receipts/:id' , postReceipts) // upload.single
-    .put('/modifiy-receipts/:id' , modifyPostReceipts)
+    // .put('/modifiy-receipts/:id' , modifyPostReceipts)
     .delete('/delete-receipts/:id' , deletePostReceipts)
     .patch('/like-receipts-owner/:id' , likeReceiptsOnwer)
     .patch('/unlike-receipts-owner/:id' , unlikeReceiptsOwner)
